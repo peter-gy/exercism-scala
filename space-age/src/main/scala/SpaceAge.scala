@@ -1,4 +1,6 @@
-object SpaceAge {
+import scala.language.dynamics
+
+object SpaceAge extends Dynamic {
 
   val periodMap = Map(
     "Mercury" -> 0.2408467,
@@ -13,13 +15,9 @@ object SpaceAge {
 
   val EARTH_YEAR_IN_SECONDS = 31557600
 
-  def onPlanet(planet: String, seconds: Double) = seconds / EARTH_YEAR_IN_SECONDS / periodMap(planet)
-  def onMercury(seconds: Double) = onPlanet("Mercury", seconds)
-  def onVenus(seconds: Double) = onPlanet("Venus", seconds)
-  def onEarth(seconds: Double) = onPlanet("Earth", seconds)
-  def onMars(seconds: Double) = onPlanet("Mars", seconds)
-  def onJupiter(seconds: Double) = onPlanet("Jupiter", seconds)
-  def onSaturn(seconds: Double) = onPlanet("Saturn", seconds)
-  def onUranus(seconds: Double) = onPlanet("Uranus", seconds)
-  def onNeptune(seconds: Double) = onPlanet("Neptune", seconds)
+  def onPlanet(planet: String, seconds: Double): Double = seconds / EARTH_YEAR_IN_SECONDS / periodMap(planet)
+
+  // onMercury, onVenus, ... -> extract planet name using substring
+  def applyDynamic(methodName: String)(seconds: Double): Double = onPlanet(methodName.substring(2), seconds)
+
 }
