@@ -9,7 +9,7 @@ object Bob {
 
   def shouting(statement: String): Boolean = statement.toUpperCase == statement && hasLetters(statement)
 
-  def questioning(statement: String): Boolean = statement.takeRight(1) == "?"
+  def questioning(statement: String): Boolean = (statement takeRight 1) == "?"
 
   def hasLetters(statement: String): Boolean = statement.exists((('a' to 'z') ++ ('A' to 'Z')).toSet.contains(_))
 }
